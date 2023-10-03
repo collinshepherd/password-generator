@@ -15,6 +15,41 @@
       <div class="card">
         <div class="card-header">
           <h2>Generate a Password</h2>
+          <!-- Checkbox reference https://www.w3schools.com/tags/att_input_type_checkbox.asp
+               This form creates a cleaner look for a prompt for the user to fill out instead of a putting prompts into javascript  -->
+          <form id="passwordForm">
+            <label for="passwordLength"> Number Of Characters</label>
+            <input
+              type="range"
+              min="8"
+              max="128"
+              value="16"
+              id="passwordLengthRange"
+              name="passwordLength"
+              value="passwordLength"
+            />
+            <input
+              type="number"
+              min="8"
+              max="128"
+              value="16"
+              id="passwordLengthNumber"
+              name="passwordLength"
+              value="passwordLength"
+            />
+            <br />
+            <input type="checkbox" id="upper" name="upper" checked />
+            <label for="upper"> Uppercase Letters</label>
+            <br />
+            <input type="checkbox" id="lower" name="lower" checked />
+            <label for="passwordLength"> Lowercase Letters</label>
+            <br />
+            <input type="checkbox" id="number" name="number" checked />
+            <label for="passwordLength"> Numbers</label>
+            <br />
+            <input type="checkbox" id="symbols" name="symbols" checked />
+            <label for="passwordLength"> Symbols</label>
+          </form>
         </div>
         <div class="card-body">
           <textarea
