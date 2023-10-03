@@ -16,7 +16,9 @@ let options = {
 // This is an event listener that checks my whole form element and whenever there is anything changed on the form it runs the function parseForm
 document.getElementById("passwordForm").addEventListener("change", parseForm);
 
-document.getElementById("passwordForm").addEventListener("submit", function (e) {
+document
+  .getElementById("passwordForm")
+  .addEventListener("submit", function (e) {
     e.preventDefault();
   });
 
@@ -79,7 +81,6 @@ function passwordGenerator(passwordOptions) {
   if (passwordOptions.length > 128 || passwordOptions.length < 8) {
     passwordText.textContent =
       "The password can not be greater than 128 or less than 8";
-      window.alert("The password can not be greater than 128 or less than 8");
     return 0;
   }
 
