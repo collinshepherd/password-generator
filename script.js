@@ -16,6 +16,10 @@ let options = {
 // This is an event listener that checks my whole form element and whenever there is anything changed on the form it runs the function parseForm
 document.getElementById("passwordForm").addEventListener("change", parseForm);
 
+document.getElementById("passwordForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+  });
+
 // This function checks the value of the entire form all at once to make sure that the form sends the values to the options object and updates all of the variables to match
 function parseForm() {
   let myForm = document.getElementById("passwordForm");
@@ -24,11 +28,11 @@ function parseForm() {
   // These two if statements check if the length is greater or less than the allowed amount and tells the user to follow those rules as well as setting them back to the allowed amount
   if (myForm.querySelector("#passwordLengthNumber").value > 128) {
     window.alert("Please do not make the length more than 128");
-    myForm.querySelector("#passwordLengthNumber").value = 128;
+    options.length = myForm.querySelector("#passwordLengthNumber").value;
   }
   if (myForm.querySelector("#passwordLengthNumber").value < 8) {
     window.alert("Please do not make the length less than 8");
-    myForm.querySelector("#passwordLengthNumber").value = 8;
+    options.length = myForm.querySelector("#passwordLengthNumber").value;
   }
 
   options.upper = myForm.querySelector("#upper").checked;
@@ -46,9 +50,11 @@ var range = document.getElementById("passwordLengthRange");
 var field = document.getElementById("passwordLengthNumber");
 
 range.addEventListener("input", function (e) {
+  e.preventDefault();
   field.value = e.target.value;
 });
 field.addEventListener("input", function (e) {
+  e.preventDefault();
   range.value = e.target.value;
 });
 
@@ -69,6 +75,14 @@ function passwordGenerator(passwordOptions) {
   var passwordNumbers = "0123456789";
   var passwordSymbols = " !#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 
+  // This if statement checks if the user chose an invalid length and if it is the function ends and shows the user an error alert.
+  if (passwordOptions.length > 128 || passwordOptions.length < 8) {
+    passwordText.textContent =
+      "The password can not be greater than 128 or less than 8";
+      window.alert("The password can not be greater than 128 or less than 8");
+    return 0;
+  }
+
   // This if statement checks if the user has all options off and if they are ends the function and tells the user to select at least one option for their password
   if (
     !passwordOptions.upper &&
@@ -78,7 +92,6 @@ function passwordGenerator(passwordOptions) {
   ) {
     passwordText.textContent =
       "You must choose at least one option for your password";
-    window.alert("You must choose at least one option for your password");
     return 0;
   }
 
